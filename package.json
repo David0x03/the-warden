@@ -1,0 +1,25 @@
+{
+	"name": "the-warden",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/David0x03/the-warden.git"
+	},
+	"author": "David0x03",
+	"bugs": {
+		"url": "https://github.com/David0x03/the-warden/issues"
+	},
+	"homepage": "https://github.com/David0x03/the-warden#readme",
+	"devDependencies": {
+		"@tsconfig/node16": "^1.0.2",
+		"@types/humanize-duration": "^3.27.1",
+		"typescript": "^4.5.5"
+	},
+	"dependencies": {
+		"discord.js": "^14.0.0-dev.1645617805.5158332",
+		"griz.js": "github:David0x03/griz.js",
+		"humanize-duration": "^3.27.1",
+		"lodash": "^4.17.21"
+	}
+}

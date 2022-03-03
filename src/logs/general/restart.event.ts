@@ -7,6 +7,8 @@ export default class extends Event {
 	}
 
 	override async run(utils: Utils) {
+		utils.client.guilds.cache.forEach((guild) => guild.members.fetch());
+
 		utils.msg.send('log', {
 			author: {
 				name: `${utils.client.user?.username} restarted!`,

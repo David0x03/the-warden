@@ -1,0 +1,39 @@
+{
+	"defaults": ["839953756585066536"],
+	"genders": {
+		"options": { "required": false, "multi": true },
+		"roles": ["947886585830056056", "947886637721976882", "947886656361496606"]
+	},
+	"sexualities": {
+		"options": { "required": false, "multi": true },
+		"roles": ["947886585830056056", "947886637721976882", "947886656361496606"]
+	},
+	"pronouns": {
+		"options": { "required": true, "multi": true },
+		"roles": ["947886585830056056", "947886637721976882", "947886656361496606"]
+	},
+	"locations": {
+		"options": { "required": false, "multi": false },
+		"roles": ["947886746887135283", "947886767049150544"]
+	},
+	"dmSettings": {
+		"options": { "required": true, "multi": false },
+		"roles": ["947886746887135283", "947886767049150544"]
+	},
+	"roles": {
+		"options": { "required": false, "multi": true },
+		"roles": ["947886585830056056", "947886637721976882", "947886656361496606"]
+	},
+	"locked": {
+		"options": { "required": false, "multi": false },
+		"roles": ["948186024763359252", "948186059815137331"]
+	},
+	"seekingDominant": {
+		"options": { "required": false, "multi": false },
+		"roles": ["948186083835924581", "948186104929079316"]
+	},
+	"consideringSubs": {
+		"options": { "required": false, "multi": false },
+		"roles": ["948186123899916310", "948186146935046195"]
+	}
+}

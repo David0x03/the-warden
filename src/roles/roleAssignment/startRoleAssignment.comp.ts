@@ -15,10 +15,6 @@ export default class extends ComponentEvent {
 	}
 
 	override async run(utils: Utils, interaction: ButtonInteraction) {
-		await utils.db.updateUser(interaction.user.id, {
-			$set: { local: interaction.locale }
-		});
-
 		const thread = await this.createThread(utils, interaction);
 		if (!thread) return;
 

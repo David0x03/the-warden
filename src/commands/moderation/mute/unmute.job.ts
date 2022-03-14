@@ -16,8 +16,8 @@ export default class extends Job {
 
 	override async run(utils: Utils, { interaction, mod, target, reason }: Args) {
 		const roles = await utils.db.settings('roles');
-		const { member: memberRole, mute: muteRole } = roles ?? {};
-		if (!memberRole || !muteRole) return;
+		const { mute: muteRole } = roles ?? {};
+		if (!muteRole) return;
 
 		if (typeof target === 'string') target = await utils.getMember(target);
 		if (typeof mod === 'string') mod = await utils.getMember(mod);
@@ -31,9 +31,12 @@ export default class extends Job {
 			return;
 		}
 
-		await target.roles.add(memberRole);
+		const muteRemoveRoles = await utils.db.user(target.id, 'roles');
+
+		if (muteRemoveRoles) await target.roles.add(muteRemoveRoles);
 		await target.roles.remove(muteRole);
 
+		utils.db.updateUser(target.id, { $unset: { roles: 1 } });
 		utils.db.delete('jobs', { name: 'unmute', 'data.target': target.id });
 		addModLogEntry(utils, 'Unmute', mod, target, reason);
 

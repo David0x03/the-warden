@@ -1,5 +1,6 @@
 import { Colors, CommandInteraction, GuildMember } from 'discord.js';
 import { Job, Utils } from 'griz.js';
+import { intersection } from 'lodash';
 import {
 	addModLogEntry,
 	errorResponse,
@@ -25,8 +26,8 @@ export default class extends Job {
 		{ interaction, mod, target, duration, reason }: Args
 	) {
 		const roles = await utils.db.settings('roles');
-		const { member: memberRole, mute: muteRole } = roles ?? {};
-		if (!memberRole || !muteRole) return;
+		const { muteRemove: muteRemoveRoles, mute: muteRole } = roles ?? {};
+		if (!muteRemoveRoles || !muteRole) return;
 
 		if (!(await modCmdValidate(utils, interaction, mod, target))) return;
 		if (!target) return;
@@ -36,8 +37,15 @@ export default class extends Job {
 			return;
 		}
 
+		const hasRoles = intersection(
+			muteRemoveRoles,
+			Array.from(target.roles.cache.keys())
+		);
+
 		await target.roles.add(muteRole);
-		await target.roles.remove(memberRole);
+		await target.roles.remove(hasRoles);
+
+		await utils.db.updateUser(target.id, { $set: { roles: hasRoles } });
 
 		const mutedUntil = Date.now() + duration;
 		const durationText = humanDuration(mutedUntil);
